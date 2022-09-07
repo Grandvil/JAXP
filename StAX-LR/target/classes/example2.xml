@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 2) документ-пример должен содержать ссылку на XML-схему -->
+<System xmlns="http://namespaceGrandvil.com/System" xsi:schemaLocation="http://namespaceGrandvil.com/System XMLScheme.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <personList>
+        <person id="1">
+            <firstName>Andrey</firstName>
+            <lastName>Evstigneev</lastName>
+            <pnoneNumber>89190149749</pnoneNumber>
+        </person>
+        <person id="2">
+            <firstName>Alena</firstName>
+            <lastName>Kuzmina</lastName>
+            <pnoneNumber>89307306455</pnoneNumber>
+        </person>
+        <person id="3">
+            <firstName>Dima</firstName>
+            <lastName>Kovanov</lastName>
+            <pnoneNumber>89304320665</pnoneNumber>
+        </person>
+    </personList>
+    <chatHistory>
+        <chat id="1">
+            <messageList>
+                <message>
+                    <sender idref="1" />
+                    <receivers>
+                        <personRef idref="2" />
+                    </receivers>
+                    <content>
+                        <file type="image/jpeg" messageEncoded="1">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</file>
+                    </content>
+                    <time>2022-08-07T20:14:56.21</time>
+                </message>
+                <message>
+                    <sender idref="2" />
+                    <receivers>
+                        <personRef idref="1" />
+                    </receivers>
+                    <content>
+                        <file type="image/jpeg" messageEncoded="0">/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCABbAFsDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9U6KKKACvEfihKLnUo1XrHNMDg5/iH+Fe3V4l4khW917UQw3+XcyjrjHzH/CgC5ovhX+ydWg1YXXnW9vuVm8vCZKkYLZIH3hXyH/wUSXXrfQI9X0HwzqPihrjWbaP7Pp0EkhVRaS5fKI2QCoHTq3WvsfRdbtofA+oQalNtla4DBdh+7+7x90eoNYi3Xg3XpDYa63n2MQ81I8TLiToDlMHoze3NAHln7I/hy+0fQPiLZX9rcWMuoW1vDAtzC0bSNsuBhAcbjlhwPUetddceEZNFt286Zlmi6wyRbG5PoTxwc12fgbUtCuLuSa1k3CB43dtsny8kg8jnoaoePL4al4mvpIn8yyfy8HGM4RfXnqKAPV/Bswk8N6Yo/gtIR1/2BW3XK/D+483SkQNkRwwgDHT5T/hXVUAFFFFABRRRQAV4fczF/E2vA/w3kgHP+21e4V4PeK3/CUa/wDKcfbJO3+21AFua1WWMxcBG6rjj8qyLvw3FJIWVkjYnqIxnp9a38+V8o6deahuIxKMnOc9qAMrSdC/s8yCCfyhJgN5abc4z1weetdbD4PS80QStcL5jfxGLJ4bHXNY9uvk7mHUc81cuNUlk0xoiqYPoDn72fWgDpfhnujm1e2LFxbtHGCfYuOnbpXdV5x8I8/aNcJH8UX85K9HoAKKKKACiiigArwy6k3+JteH928kH/j7V7dcTCFAx9cdcV4fJ83iTXmx967kP/j7UAabx7uRSbQq8iljJKn60SfdoAhVD09aZOpWNh2qdQdw47025+6w2/jQB0nwnXEmse5i/wDZ69CrgPhYu2TV+c8x/wDs9d/QAUUUUAFFFFAGbr1x9ns0bj/WAc/Q1420gOsao3964Y/+PNXrvilgunx5/wCeo/ka8gKk6pqBH/PZv/QjQBsxgbCRzzQ43Co7dvkI96fnLEUAA6ikmGVIpGPzLTwNzYoA3PhdLtuNaHo0f83r0OvKfBNwbK81fLMA0i42n0L16tQAUUUUAFFFFAHLfESc2+iwMMZ+0KOf91q8vi3CaZyMb2z7dTXpHxRYr4ft8f8AP0v/AKA9ef7R5MRI6r/SgC/bLlSfelLBZTzSWrHYR7025wvPfNAD3X5l+tOHytTGk5HNOX5j60AN0ucw3F2Rj5m7/U17FXizZhkYp8pY817TQAUUUUAFFFFAHNePNIOtaPDAJ/I2zq+4Lu/hYY6j1ry6+mOnSfZz+98smPdnGccZr3asvW/+WP8AwL+lAHl2n3IncDywvJ7+1SXw2/n/AErX1r7/APwEfzrn7z7v4/0oAuzQiPaeOOcYqtJeiMEiPp7/AP1qsp/rE+orp9E/10P/AAL+RoA4iGwk1pnK3DW2w54BOc/iPSvbaZD/AKpP90U+gAooooA//9k=</file>
+                    </content>
+                    <time>2022-08-07T20:15:56.21</time>
+                </message>
+            </messageList>
+            <type>
+                <private>
+                    <dateOfCreation>2022-10-14T18:33:07.66</dateOfCreation>
+                </private>
+            </type>
+        </chat>
+
+        <chat id="2">
+            <messageList>
+                <message>
+                    <sender idref="1" />
+                    <receivers>
+                        <personRef idref="2" />
+                        <personRef idref="3" />
+                    </receivers>
+                    <content>
+                        <text>Hello!</text>
+                    </content>
+                    <time>2022-05-23T05:39:10.71</time>
+                </message>
+            </messageList>
+            <type>
+                <group>
+                    <dateOfCreation>2022-03-15T06:14:44.24</dateOfCreation>
+                    <title>PRIm-121</title>
+                    <admins>
+                        <personRef idref="1" />
+                    </admins>
+                </group>
+            </type>
+        </chat>
+    </chatHistory>
+</System>

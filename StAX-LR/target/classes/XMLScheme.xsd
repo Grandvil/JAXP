@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 1) схеме должно быть сопоставлено определенное пространство имен,
+    при этом должна быть предусмотрена квалификация элементов, определенных схемой,
+    в документе, построенном на ее основе -->
+<xs:schema xmlns:sy="http://namespaceGrandvil.com/System" targetNamespace="http://namespaceGrandvil.com/System" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:complexType name="Person">
+        <xs:sequence>
+            <xs:element name="firstName" type="xs:string" />
+            <xs:element name="lastName" type="xs:string" />
+            <xs:element name="pnoneNumber" type="xs:unsignedLong" />
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:unsignedByte" use="required" />
+    </xs:complexType>
+
+    <!-- 3) при описании сложных типов необходимо продемонстрировать использование не менее двух видов модельных групп (sequence) -->
+    <xs:complexType name="PersonList">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="person" type="sy:Person" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- 3) схема должна демонстрировать использование конструкций для описания сложного типа, образованного вложенными элементами и атрибутами -->
+    <xs:complexType name="PersonRef">
+        <xs:attribute name="idref" type="xs:unsignedByte" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="PersonsRef">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="personRef" type="sy:PersonRef" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Private">
+        <xs:sequence>
+            <xs:element name="dateOfCreation" type="xs:dateTime" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- 5) схема должна демонстрировать возможность описания нового сложного типа на базе сложного типа путем расширения -->
+    <xs:complexType name="Group">
+        <xs:complexContent>
+            <xs:extension base="sy:Private">
+                <xs:sequence>
+                    <xs:element name="title" type="xs:string" />
+                    <xs:element name="admins" type="sy:PersonsRef" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="Type">
+        <xs:choice minOccurs="1" maxOccurs="1">
+            <xs:element name="private" type="sy:Private" />
+            <xs:element name="group" type="sy:Group" />
+        </xs:choice>
+    </xs:complexType>
+
+    <!-- 6) схема должна демонстрировать возможности описания новых простых типов на базе существующих 
+        (в том числе описание перечислимого типа) с использованием не менее трех видов фасетов -->
+    <xs:simpleType name="MIMEType">
+        <!-- 5) путем ограничения -->
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="image/bmp" />
+            <xs:enumeration value="image/jpeg" />
+            <xs:enumeration value="image/gif" />
+            <xs:enumeration value="image/png" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- 5) схема должна демонстрировать возможность описания нового сложного типа на базе простого типа путем расширения -->
+    <xs:complexType name="File">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="type" type="sy:MIMEType" use="required" />
+                <xs:attribute name="messageEncoded" type="xs:boolean" use="required" />
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <!-- 3) при описании сложных типов необходимо продемонстрировать использование не менее двух видов модельных групп (choice) -->
+    <xs:complexType name="Content">
+        <xs:choice minOccurs="1" maxOccurs="1">
+            <xs:element name="file" type="sy:File" />
+            <xs:element name="text" type="xs:string" />
+        </xs:choice>
+    </xs:complexType>
+
+    <!-- 3) при описании сложных типов необходимо продемонстрировать использование не менее двух видов модельных групп (all) -->
+    <xs:complexType name="Message">
+        <xs:all>
+            <xs:element name="sender" type="sy:PersonRef" />
+            <xs:element name="receivers" type="sy:PersonsRef" />
+            <xs:element name="content" type="sy:Content" />
+            <xs:element name="time" type="xs:dateTime" />
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="MessageList">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="message" type="sy:Message" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- 4) схема должна содержать описание абстрактного сложного типа и элемента этого типа, 
+        а пример документа - демонстрировать использование последнего -->
+    <xs:complexType name="AbstractChat" abstract="true">
+        <xs:sequence>
+            <xs:element name="messageList" type="sy:MessageList" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Chat">
+        <xs:complexContent>
+            <xs:extension base="sy:AbstractChat">
+                <xs:sequence>
+                    <xs:element name="type" type="sy:Type" />
+                </xs:sequence>
+                <xs:attribute name="id" type="xs:unsignedByte" use="required" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="ChatHistory">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="chat" type="sy:Chat" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- 3) при этом должен быть хотя бы один сложный тип, хотя бы один вложенный элемент которого был бы также сложного типа -->
+    <xs:element name="System">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="personList" type="sy:PersonList" />
+                <xs:element name="chatHistory" type="sy:ChatHistory" />
+            </xs:sequence>
+        </xs:complexType>
+        <!-- 7) схема должна содержать описание ограничения уникальности, ключа и ссылки на ключ, 
+            применение чего должно иметь смысл в предметной области -->
+        <xs:key name="personID">
+            <xs:selector xpath=".//person" />
+            <xs:field xpath="@id" />
+        </xs:key>
+        <xs:keyref name="personIdref" refer="sy:personID">
+            <xs:selector xpath=".//personRef" />
+            <xs:field xpath="@idref" />
+        </xs:keyref>
+    </xs:element>
+</xs:schema>
